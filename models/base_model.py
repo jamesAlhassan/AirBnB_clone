@@ -12,7 +12,7 @@ class BaseModel:
                 if key != "__class__":
                     setattr(self, key, value)
                     if key in ["created_at", "updated_at"]:
-                      setattr(self, key, dt.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                        setattr(self, key, dt.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
 
         else:
             self.id = str(ui())
@@ -25,7 +25,7 @@ class BaseModel:
     def save(self):
         self.updated_at = dt.now()
 
-     def to_dict(self):
+    def to_dict(self):
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__
         my_dict["created_at"] = my_dict["created_at"].isoformat()
