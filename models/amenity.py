@@ -1,0 +1,6 @@
+#!/usr/bin/python3s
+
+from models.base_model import BaseModel
+
+class Amenity(BaseModel):
+    name = ""
