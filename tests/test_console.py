@@ -107,3 +107,16 @@ EOF  all  count  create  destroy  help  quit  show  update
             HBNBCommand().onecmd("help update")
         s = 'Updates an instance by adding or updating attribute.\n        \n'
         self.assertEqual(s, f.getvalue())
+
+    def test_do_quit(self):
+        """Tests quit commmand."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("quit")
+        msg = f.getvalue()
+        self.assertTrue(len(msg) == 0)
+        self.assertEqual("", msg)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("quit garbage")
+        msg = f.getvalue()
+        self.assertTrue(len(msg) == 0)
+        self.assertEqual("", msg)
