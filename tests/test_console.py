@@ -191,3 +191,25 @@ EOF  all  count  create  destroy  help  quit  show  update
             HBNBCommand().onecmd("show {} {}".format(classname, uid))
         s = f.getvalue()[:-1]
         self.assertTrue(uid in s)
+
+    def test_do_show_error(self):
+        """Tests show command with errors."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class name missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show garbage")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class doesn't exist **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show BaseModel")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** instance id missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show BaseModel 6524359")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** no instance found **")
