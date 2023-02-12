@@ -174,3 +174,20 @@ EOF  all  count  create  destroy  help  quit  show  update
         msg = f.getvalue()[:-1]
         self.assertEqual(msg, "** class doesn't exist **")
 
+    def test_do_show(self):
+        """Tests show for all classes."""
+        for classname in self.classes():
+            self.help_test_do_show(classname)
+            self.help_test_show_advanced(classname)
+
+    def help_test_do_show(self, classname):
+        """Helps test the show command."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create {}".format(classname))
+        uid = f.getvalue()[:-1]
+        self.assertTrue(len(uid) > 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show {} {}".format(classname, uid))
+        s = f.getvalue()[:-1]
+        self.assertTrue(uid in s)
