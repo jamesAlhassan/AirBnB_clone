@@ -96,3 +96,29 @@ class TestFileStorage(unittest.TestCase):
         """Tests all() method for Review."""
         self.help_test_all("Review")
 
+    def help_test_all_multiple(self, classname):
+        """Helper tests all() method with many objects for classname."""
+        self.resetStorage()
+        self.assertEqual(storage.all(), {})
+
+        cls = storage.classes()[classname]
+        objs = [cls() for i in range(1000)]
+        [storage.new(o) for o in objs]
+        self.assertEqual(len(objs), len(storage.all()))
+        for o in objs:
+            key = "{}.{}".format(type(o).__name__, o.id)
+            self.assertTrue(key in storage.all())
+            self.assertEqual(storage.all()[key], o)
+
+    def test_5_all_multiple_base_model(self):
+        """Tests all() method with many objects."""
+        self.help_test_all_multiple("BaseModel")
+
+    def test_5_all_multiple_user(self):
+        """Tests all_multiple() method for User."""
+        self.help_test_all_multiple("User")
+
+    def test_5_all_multiple_state(self):
+        """Tests all_multiple() method for State."""
+        self.help_test_all_multiple("State")
+
