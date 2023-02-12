@@ -590,3 +590,69 @@ EOF  all  count  create  destroy  help  quit  show  update
         self.assertIn(str(val), s)
         self.assertIn(attr, s)
 
+     def test_do_update_error(self):
+        """Tests update command with errors."""
+        uid = self.create_class("BaseModel")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class name missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update garbage")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class doesn't exist **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update BaseModel")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** instance id missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("update BaseModel 6534276893")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('update BaseModel {}'.format(uid))
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** attribute name missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('update BaseModel {} name'.format(uid))
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** value missing **")
+
+    def test_do_update_error_advanced(self):
+        """Tests update() command with errors."""
+        uid = self.create_class("BaseModel")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(".update()")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class name missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("garbage.update()")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class doesn't exist **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.update()")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** instance id missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("BaseModel.update(6534276893)")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** no instance found **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.update("{}")'.format(uid))
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** attribute name missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.update("{}", "name")'.format(uid))
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** value missing **")
+
