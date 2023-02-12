@@ -1,37 +1,37 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-from uuid import uuid4 as ui
-from datetime import datetime as dt
+import uuid
+from datetime import datetime
+from models import storage
 
 
 class BaseModel:
-    
-    
-    def  __init__(self, *args, **kwargs):
-        if kwargs:
-            for key, item in kwargs.items():
-                if key != "__class__":
-                    setattr(self, key, value)
-                    if key in ["created_at", "updated_at"]:
-                        setattr(self, key, dt.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
 
+
+    def __init__(self, *args, **kwargs):
+        if kwargs is not None and kwargs != {}:
+            for key in kwargs:
+                if key == "created_at":
+                    self.__dict__["created_at"] = datetime.strptime(
+                        kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                elif key == "updated_at":
+                    self.__dict__["updated_at"] = datetime.strptime(
+                        kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f")
+                else:
+                    self.__dict__[key] = kwargs[key]
         else:
-            self.id = str(ui())
-            self.created_at = dt.now()
-            self.updated_at = dt.now()
-            from .__init__ import storage
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             storage.new(self)
 
-
-    
     def __str__(self):
-        return f'[{type(self).__name__}, {self.id}, {self.__dict__}]'
+        return "[{}] ({}) {}".\
+            format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
-        self.updated_at = dt.now()
-        from .__init__ import storage
+        self.updated_at = datetime.now()
         storage.save()
-
 
     def to_dict(self):
         my_dict = self.__dict__.copy()
@@ -39,4 +39,3 @@ class BaseModel:
         my_dict["created_at"] = my_dict["created_at"].isoformat()
         my_dict["updated_at"] = my_dict["updated_at"].isoformat()
         return my_dict
-
