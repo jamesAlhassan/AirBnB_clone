@@ -134,6 +134,7 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, line):
+        '''shows all the string representations of all instances'''
         if line != "":
             words = line.split(' ')
             if words[0] not in storage.classes():
@@ -147,6 +148,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_list)
 
     def do_count(self, line):
+        '''counts the instaces of a class'''
         words = line.split(' ')
         if not words[0]:
             print("** class name missing **")
@@ -159,6 +161,7 @@ class HBNBCommand(cmd.Cmd):
             print(len(matches))
 
     def do_update(self, line):
+        '''Updates instance attributes '''
         if line == "" or line is None:
             print("** class name missing **")
             return
