@@ -105,3 +105,33 @@ class TestBaseModel(unittest.TestCase):
         d2["updated_at"] = repr(d2["updated_at"])
         self.assertEqual(d, d2)
 
+    def test_3_to_dict(self):
+        """Tests the public instance method to_dict()."""
+
+        b = BaseModel()
+        b.name = "Laura"
+        b.age = 23
+        d = b.to_dict()
+        self.assertEqual(d["id"], b.id)
+        self.assertEqual(d["__class__"], type(b).__name__)
+        self.assertEqual(d["created_at"], b.created_at.isoformat())
+        self.assertEqual(d["updated_at"], b.updated_at.isoformat())
+        self.assertEqual(d["name"], b.name)
+        self.assertEqual(d["age"], b.age)
+
+    def test_3_to_dict_no_args(self):
+        """Tests to_dict() with no arguments."""
+        self.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            BaseModel.to_dict()
+        msg = "to_dict() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), msg)
+
+    def test_3_to_dict_excess_args(self):
+        """Tests to_dict() with too many arguments."""
+        self.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            BaseModel.to_dict(self, 98)
+        msg = "to_dict() takes 1 positional argument but 2 were given"
+        self.assertEqual(str(e.exception), msg)
+
