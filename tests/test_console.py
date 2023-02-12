@@ -134,3 +134,15 @@ EOF  all  count  create  destroy  help  quit  show  update
         self.assertTrue(len(msg) == 1)
         self.assertEqual("\n", msg)
 
+     def test_emptyline(self):
+        """Tests emptyline functionality."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("\n")
+        s = ""
+        self.assertEqual(s, f.getvalue())
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("                  \n")
+        s = ""
+        self.assertEqual(s, f.getvalue())
+
