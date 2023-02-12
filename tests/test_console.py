@@ -29,3 +29,8 @@ class TestHBNBCommand(unittest.TestCase):
         "intfoo": 248,
         "floatfoo": 9.8
     }
+
+    def setUp(self):
+        if os.path.isfile("file.json"):
+            os.remove("file.json")
+        self.resetStorage()
