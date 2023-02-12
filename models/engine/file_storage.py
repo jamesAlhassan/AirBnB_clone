@@ -50,3 +50,4 @@ class FileStorage:
                             FileStorage.__objects[key] = Review(**item)
         except FileNotFoundError:
             pass
+            
