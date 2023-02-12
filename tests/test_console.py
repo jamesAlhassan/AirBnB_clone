@@ -146,3 +146,18 @@ EOF  all  count  create  destroy  help  quit  show  update
         s = ""
         self.assertEqual(s, f.getvalue())
 
+    def test_do_create(self):
+        """Tests create for all classes."""
+        for classname in self.classes():
+            self.help_test_do_create(classname)
+
+    def help_test_do_create(self, classname):
+        """Helper method to test the create commmand."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create {}".format(classname))
+        uid = f.getvalue()[:-1]
+        self.assertTrue(len(uid) > 0)
+        key = "{}.{}".format(classname, uid)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("all {}".format(classname))
+        self.assertTrue(uid in f.getvalue())
