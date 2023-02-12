@@ -31,3 +31,26 @@ class TestBaseModel(unittest.TestCase):
         FileStorage._FileStorage__objects = {}
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
+
+    def test_3_instantiation(self):
+        """Tests instantiation of BaseModel class."""
+
+        b = BaseModel()
+        self.assertEqual(str(type(b)), "<class 'models.base_model.BaseModel'>")
+        self.assertIsInstance(b, BaseModel)
+        self.assertTrue(issubclass(type(b), BaseModel))
+
+    def test_3_init_no_args(self):
+        """Tests __init__ with no arguments."""
+        self.resetStorage()
+        with self.assertRaises(TypeError) as e:
+            BaseModel.__init__()
+        msg = "__init__() missing 1 required positional argument: 'self'"
+        self.assertEqual(str(e.exception), msg)
+
+    def test_3_init_many_args(self):
+        """Tests __init__ with many arguments."""
+        self.resetStorage()
+        args = [i for i in range(1000)]
+        b = BaseModel(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+        b = BaseModel(*args)
