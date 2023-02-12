@@ -9,7 +9,7 @@ import json
 
 
 class HBNBCommand(cmd.Cmd):
-    '''Command interpreterclass '''
+    '''Command interpreterclass that inherits from cmd.Cmd '''
     prompt = "(hbnb) "
 
     def default(self, line):
@@ -80,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_quit(self, line):
-        '''Exits program'''
+        '''Exits and closes the program'''
         return True
 
     def emptyline(self):
@@ -88,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, line):
-        ''' creates instance'''
+        ''' creates instance of the class'''
         if line == "" or line is None:
             print("** class name missing **")
         elif line not in storage.classes():
