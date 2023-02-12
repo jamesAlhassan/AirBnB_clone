@@ -66,7 +66,7 @@ EOF  all  count  create  destroy  help  quit  show  update
         s = 'Exits the program.\n        \n'
         self.assertEqual(s, f.getvalue())
 
-     def test_help_create(self):
+    def test_help_create(self):
         """Tests the help command."""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help create")
@@ -121,7 +121,7 @@ EOF  all  count  create  destroy  help  quit  show  update
         self.assertTrue(len(msg) == 0)
         self.assertEqual("", msg)
 
-     def test_do_EOF(self):
+    def test_do_EOF(self):
         """Tests EOF commmand."""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("EOF")
@@ -134,7 +134,7 @@ EOF  all  count  create  destroy  help  quit  show  update
         self.assertTrue(len(msg) == 1)
         self.assertEqual("\n", msg)
 
-     def test_emptyline(self):
+    def test_emptyline(self):
         """Tests emptyline functionality."""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("\n")
