@@ -590,7 +590,7 @@ EOF  all  count  create  destroy  help  quit  show  update
         self.assertIn(str(val), s)
         self.assertIn(attr, s)
 
-     def test_do_update_error(self):
+    def test_do_update_error(self):
         """Tests update command with errors."""
         uid = self.create_class("BaseModel")
         with patch('sys.stdout', new=StringIO()) as f:
