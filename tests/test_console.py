@@ -11,7 +11,9 @@ from io import StringIO
 import re
 import os
 
+
 class TestHBNBCommand(unittest.TestCase):
+
     attribute_values = {
         str: "foobar108",
         int: 1008,
@@ -35,7 +37,17 @@ class TestHBNBCommand(unittest.TestCase):
             os.remove("file.json")
         self.resetStorage()
 
-     def resetStorage(self):
+    def resetStorage(self):
         FileStorage._FileStorage__objects = {}
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
+
+    def test_help(self):
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help")
+        s = """
+        Documented commands (type help <topic>):
+========================================
+EOF  all  count  create  destroy  help  quit  show  update
+"""
+        self.assertEqual(s, f.getvalue())
