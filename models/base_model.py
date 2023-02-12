@@ -33,11 +33,13 @@ class BaseModel:
 
     def __str__(self):
         '''Returns a string representation of the class'''
+
         return "[{}] ({}) {}".\
             format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         '''Updates the public the public instance with the current date and time'''
+        
         self.updated_at = dt.now()
         storage.save()
 
@@ -45,6 +47,7 @@ class BaseModel:
         '''
         Returns a dictionary representation of the class instance
         Returns a dict with the keys, values of __dict__'''
+
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__
         my_dict["created_at"] = my_dict["created_at"].isoformat()
