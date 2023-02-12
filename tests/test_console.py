@@ -14,6 +14,8 @@ import os
 
 class TestHBNBCommand(unittest.TestCase):
 
+    """Tests HBNBCommand console."""
+
     attribute_values = {
         str: "foobar108",
         int: 1008,
@@ -33,20 +35,23 @@ class TestHBNBCommand(unittest.TestCase):
     }
 
     def setUp(self):
+        """Sets up test cases."""
         if os.path.isfile("file.json"):
             os.remove("file.json")
         self.resetStorage()
 
     def resetStorage(self):
+        """Resets FileStorage data."""
         FileStorage._FileStorage__objects = {}
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
     def test_help(self):
+        """Tests the help command."""
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("help")
         s = """
-        Documented commands (type help <topic>):
+Documented commands (type help <topic>):
 ========================================
 EOF  all  count  create  destroy  help  quit  show  update
 """
