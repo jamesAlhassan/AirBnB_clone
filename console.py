@@ -9,7 +9,6 @@ import json
 
 class HBNBCommand(cmd.Cmd):
 
-
     prompt = "(hbnb) "
 
     def default(self, line):
