@@ -75,16 +75,20 @@ class HBNBCommand(cmd.Cmd):
                 storage.all()[key].save()
 
     def do_EOF(self, line):
+        '''EOF character handler'''
         print()
         return True
 
     def do_quit(self, line):
+        '''Exits program'''
         return True
 
     def emptyline(self):
+        '''Does nothing on ENTER'''
         pass
 
     def do_create(self, line):
+        ''' creates instance'''
         if line == "" or line is None:
             print("** class name missing **")
         elif line not in storage.classes():
@@ -95,6 +99,7 @@ class HBNBCommand(cmd.Cmd):
             print(b.id)
 
     def do_show(self, line):
+        '''shows the string representation of an instance'''
         if line == "" or line is None:
             print("** class name missing **")
         else:
@@ -111,6 +116,7 @@ class HBNBCommand(cmd.Cmd):
                     print(storage.all()[key])
 
     def do_destroy(self, line):
+        '''Deletes a class'''
         if line == "" or line is None:
             print("** class name missing **")
         else:
