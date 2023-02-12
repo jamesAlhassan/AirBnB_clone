@@ -6,8 +6,6 @@ from models import storage
 
 
 class BaseModel:
-
-
     def __init__(self, *args, **kwargs):
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
