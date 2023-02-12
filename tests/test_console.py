@@ -34,3 +34,8 @@ class TestHBNBCommand(unittest.TestCase):
         if os.path.isfile("file.json"):
             os.remove("file.json")
         self.resetStorage()
+
+     def resetStorage(self):
+        FileStorage._FileStorage__objects = {}
+        if os.path.isfile(FileStorage._FileStorage__file_path):
+            os.remove(FileStorage._FileStorage__file_path)
