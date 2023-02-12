@@ -539,3 +539,54 @@ EOF  all  count  create  destroy  help  quit  show  update
         s = f.getvalue()
         self.assertIn(attr, s)
         self.assertIn(val, s)
+
+    def test_update_everything(self):
+        """Tests update command with errthang, like a baws."""
+        for classname, cls in self.classes().items():
+            uid = self.create_class(classname)
+            for attr, value in self.test_random_attributes.items():
+                if type(value) is not str:
+                    pass
+                quotes = (type(value) == str)
+                self.help_test_update(classname, uid, attr,
+                                      value, quotes, False)
+                self.help_test_update(classname, uid, attr,
+                                      value, quotes, True)
+            pass
+            if classname == "BaseModel":
+                continue
+            for attr, attr_type in self.attributes()[classname].items():
+                if attr_type not in (str, int, float):
+                    continue
+                self.help_test_update(classname, uid, attr,
+                                      self.attribute_values[attr_type],
+                                      True, False)
+                self.help_test_update(classname, uid, attr,
+                                      self.attribute_values[attr_type],
+                                      False, True)
+
+    def help_test_update(self, classname, uid, attr, val, quotes, func):
+        """Tests update commmand."""
+        #  print("QUOTES", quotes)
+        FileStorage._FileStorage__objects = {}
+        if os.path.isfile("file.json"):
+            os.remove("file.json")
+        uid = self.create_class(classname)
+        value_str = ('"{}"' if quotes else '{}').format(val)
+        if func:
+            cmd = '{}.update("{}", "{}", {})'
+        else:
+            cmd = 'update {} {} {} {}'
+        cmd = cmd.format(classname, uid, attr, value_str)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(cmd)
+        msg = f.getvalue()[:-1]
+        # print("MSG::", msg)
+        # print("CMD::", cmd)
+        self.assertEqual(len(msg), 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('{}.show("{}")'.format(classname, uid))
+        s = f.getvalue()
+        self.assertIn(str(val), s)
+        self.assertIn(attr, s)
+
