@@ -135,7 +135,7 @@ class TestBaseModel(unittest.TestCase):
         msg = "to_dict() takes 1 positional argument but 2 were given"
         self.assertEqual(str(e.exception), msg)
 
-     def test_4_instantiation(self):
+    def test_4_instantiation(self):
         """Tests instantiation with **kwargs."""
 
         my_model = BaseModel()
@@ -191,4 +191,3 @@ class TestBaseModel(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
