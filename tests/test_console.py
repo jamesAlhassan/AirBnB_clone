@@ -161,3 +161,16 @@ EOF  all  count  create  destroy  help  quit  show  update
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("all {}".format(classname))
         self.assertTrue(uid in f.getvalue())
+
+    def test_do_create_error(self):
+        """Tests create command with errors."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class name missing **")
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create garbage")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class doesn't exist **")
+
