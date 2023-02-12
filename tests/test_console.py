@@ -357,3 +357,45 @@ EOF  all  count  create  destroy  help  quit  show  update
             HBNBCommand().onecmd("all garbage")
         msg = f.getvalue()[:-1]
         self.assertEqual(msg, "** class doesn't exist **")
+
+    def help_test_all_advanced(self, classname):
+        """Helps test the .all() command."""
+        uid = self.create_class(classname)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("{}.all()".format(classname))
+        s = f.getvalue()[:-1]
+        self.assertTrue(len(s) > 0)
+        self.assertIn(uid, s)
+
+    def test_do_all_error_advanced(self):
+        """Tests all() command with errors."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("garbage.all()")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class doesn't exist **")
+
+    def test_count_all(self):
+        """Tests count for all classes."""
+        for classname in self.classes():
+            self.help_test_count_advanced(classname)
+
+    def help_test_count_advanced(self, classname):
+        """Helps test .count() command."""
+        for i in range(20):
+            uid = self.create_class(classname)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("{}.count()".format(classname))
+        s = f.getvalue()[:-1]
+        self.assertTrue(len(s) > 0)
+        self.assertEqual(s, "20")
+
+    def test_do_count_error(self):
+        """Tests .count() command with errors."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("garbage.count()")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class doesn't exist **")
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(".count()")
+        msg = f.getvalue()[:-1]
+        self.assertEqual(msg, "** class name missing **")
