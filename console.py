@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+'''Console / Command Interpreter '''
 
 import cmd
 from models.base_model import BaseModel
@@ -8,14 +9,18 @@ import json
 
 
 class HBNBCommand(cmd.Cmd):
-
+'''Command interpreterclass '''
     prompt = "(hbnb) "
 
     def default(self, line):
+        '''returns command if thers is no match'''
+
         # print("DEF:::", line)
         self._precmd(line)
 
     def _precmd(self, line):
+        '''tests for class.syntax()'''
+
         # print("PRECMD:::", line)
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
@@ -47,6 +52,8 @@ class HBNBCommand(cmd.Cmd):
         return command
 
     def update_dict(self, classname, uid, s_dict):
+        '''Helper method for update with dict'''
+
         s = s_dict.replace("'", '"')
         d = json.loads(s)
         if not classname:
