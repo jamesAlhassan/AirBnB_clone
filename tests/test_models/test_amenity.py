@@ -12,6 +12,7 @@ import os
 from models import storage
 from models.base_model import BaseModel
 
+
 class TestAmenity(unittest.TestCase):
 
     """Test Cases for the Amenity class."""
