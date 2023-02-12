@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/python3
 """Unittest module for the FileStorage class."""
 
@@ -73,4 +71,28 @@ class TestFileStorage(unittest.TestCase):
     def test_5_all_base_model(self):
         """Tests all() method for BaseModel."""
         self.help_test_all("BaseModel")
+
+    def test_5_all_user(self):
+        """Tests all() method for User."""
+        self.help_test_all("User")
+
+    def test_5_all_state(self):
+        """Tests all() method for State."""
+        self.help_test_all("State")
+
+    def test_5_all_city(self):
+        """Tests all() method for City."""
+        self.help_test_all("City")
+
+    def test_5_all_amenity(self):
+        """Tests all() method for Amenity."""
+        self.help_test_all("Amenity")
+
+    def test_5_all_place(self):
+        """Tests all() method for Place."""
+        self.help_test_all("Place")
+
+    def test_5_all_review(self):
+        """Tests all() method for Review."""
+        self.help_test_all("Review")
 
