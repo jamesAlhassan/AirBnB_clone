@@ -439,3 +439,64 @@ EOF  all  count  create  destroy  help  quit  show  update
         s = f.getvalue()
         self.assertIn(attr, s)
         self.assertIn(val, s)
+
+    def test_update_3(self):
+        """Tests update 1..."""
+        classname = "City"
+        attr = "foostr"
+        val = "fooval"
+        uid = self.create_class(classname)
+        cmd = '{}.update("{}", "{}", "{}")'
+        #  cmd = 'update {} {} {} {}'
+        cmd = cmd.format(classname, uid, attr, val)
+        #  print("CMD::", cmd)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(cmd)
+        s = f.getvalue()
+        self.assertEqual(len(s), 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('{}.show("{}")'.format(classname, uid))
+        s = f.getvalue()
+        self.assertIn(attr, s)
+        self.assertIn(val, s)
+
+    def test_update_4(self):
+        """Tests update 1..."""
+        classname = "State"
+        attr = "foostr"
+        val = "fooval"
+        uid = self.create_class(classname)
+        cmd = '{}.update("{}", "{}", "{}")'
+        #  cmd = 'update {} {} {} {}'
+        cmd = cmd.format(classname, uid, attr, val)
+        #  print("CMD::", cmd)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(cmd)
+        s = f.getvalue()
+        self.assertEqual(len(s), 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('{}.show("{}")'.format(classname, uid))
+        s = f.getvalue()
+        self.assertIn(attr, s)
+        self.assertIn(val, s)
+
+    def test_update_5(self):
+        """Tests update 1..."""
+        classname = "Amenity"
+        attr = "foostr"
+        val = "fooval"
+        uid = self.create_class(classname)
+        cmd = '{}.update("{}", "{}", "{}")'
+        #  cmd = 'update {} {} {} {}'
+        cmd = cmd.format(classname, uid, attr, val)
+        #  print("CMD::", cmd)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(cmd)
+        s = f.getvalue()
+        self.assertEqual(len(s), 0)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('{}.show("{}")'.format(classname, uid))
+        s = f.getvalue()
+        self.assertIn(attr, s)
+        self.assertIn(val, s)
+
