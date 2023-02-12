@@ -10,3 +10,22 @@ import sys
 from io import StringIO
 import re
 import os
+
+class TestHBNBCommand(unittest.TestCase):
+    attribute_values = {
+        str: "foobar108",
+        int: 1008,
+        float: 1.08
+    }
+
+    reset_values = {
+        str: "",
+        int: 0,
+        float: 0.0
+    }
+
+    test_random_attributes = {
+        "strfoo": "barfoo",
+        "intfoo": 248,
+        "floatfoo": 9.8
+    }
