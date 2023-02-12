@@ -51,3 +51,26 @@ class TestFileStorage(unittest.TestCase):
             b = FileStorage(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
         msg = "object() takes no parameters"
         self.assertEqual(str(e.exception), msg)
+
+    def test_5_attributes(self):
+        """Tests class attributes."""
+        self.resetStorage()
+        self.assertTrue(hasattr(FileStorage, "_FileStorage__file_path"))
+        self.assertTrue(hasattr(FileStorage, "_FileStorage__objects"))
+        self.assertEqual(getattr(FileStorage, "_FileStorage__objects"), {})
+
+    def help_test_all(self, classname):
+        """Helper tests all() method for classname."""
+        self.resetStorage()
+        self.assertEqual(storage.all(), {})
+
+        o = storage.classes()[classname]()
+        storage.new(o)
+        key = "{}.{}".format(type(o).__name__, o.id)
+        self.assertTrue(key in storage.all())
+        self.assertEqual(storage.all()[key], o)
+
+    def test_5_all_base_model(self):
+        """Tests all() method for BaseModel."""
+        self.help_test_all("BaseModel")
+
