@@ -120,3 +120,17 @@ EOF  all  count  create  destroy  help  quit  show  update
         msg = f.getvalue()
         self.assertTrue(len(msg) == 0)
         self.assertEqual("", msg)
+
+     def test_do_EOF(self):
+        """Tests EOF commmand."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF")
+        msg = f.getvalue()
+        self.assertTrue(len(msg) == 1)
+        self.assertEqual("\n", msg)
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("EOF garbage")
+        msg = f.getvalue()
+        self.assertTrue(len(msg) == 1)
+        self.assertEqual("\n", msg)
+
