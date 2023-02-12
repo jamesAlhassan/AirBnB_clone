@@ -7,7 +7,13 @@ from models import storage
 
 
 class BaseModel:
-    '''Base class which all other classes inherit from'''
+    """
+    Initializes an instance of the BaseModel class.
+
+    If keyword arguments are passed, they are used to set the corresponding
+    attributes. If not, a unique identifier is generated and the created_at
+    and updated_at attributes are set to the current date and time.
+    """
     def __init__(self, *args, **kwargs):
         if kwargs is not None and kwargs != {}:
             for key in kwargs:
@@ -31,12 +37,14 @@ class BaseModel:
             format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
-        '''Updates the public the public instance with the current date'''
+        '''Updates the public the public instance with the current date and time'''
         self.updated_at = dt.now()
         storage.save()
 
     def to_dict(self):
-        '''Returns a dict with the keys, values of __dict__'''
+        '''
+        Returns a dictionary representation of the class instance
+        Returns a dict with the keys, values of __dict__'''
         my_dict = self.__dict__.copy()
         my_dict["__class__"] = type(self).__name__
         my_dict["created_at"] = my_dict["created_at"].isoformat()
