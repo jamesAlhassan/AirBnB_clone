@@ -213,3 +213,15 @@ EOF  all  count  create  destroy  help  quit  show  update
             HBNBCommand().onecmd("show BaseModel 6524359")
         msg = f.getvalue()[:-1]
         self.assertEqual(msg, "** no instance found **")
+
+    def help_test_show_advanced(self, classname):
+        """Helps test .show() command."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("create {}".format(classname))
+        uid = f.getvalue()[:-1]
+        self.assertTrue(len(uid) > 0)
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('{}.show("{}")'.format(classname, uid))
+        s = f.getvalue()
+        self.assertTrue(uid in s)
