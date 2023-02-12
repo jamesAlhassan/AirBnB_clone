@@ -51,3 +51,11 @@ class TestHBNBCommand(unittest.TestCase):
 EOF  all  count  create  destroy  help  quit  show  update
 """
         self.assertEqual(s, f.getvalue())
+
+    def test_help_EOF(self):
+        """Tests the help command."""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("help EOF")
+        s = 'Handles End Of File character.\n        \n'
+        self.assertEqual(s, f.getvalue())
+
