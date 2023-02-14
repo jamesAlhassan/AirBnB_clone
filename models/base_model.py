@@ -38,8 +38,8 @@ class BaseModel:
             format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
-        '''Updates the public the public instance with the current date and time'''
-        
+        '''Updates the public instance with the current date and time'''
+
         self.updated_at = dt.now()
         storage.save()
 

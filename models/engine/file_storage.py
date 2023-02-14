@@ -9,20 +9,17 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage:
     """
-    This class handles the storage and retrieval of objects in a JSON file
-    FileStorage class that serializes instances to a JSON file and deserializes JSON file to instances"""
+    This class handles the storage and retrieval of objects in a JSON fil
+    """
 
     __file_path = 'file.json'
     __objects = {}
 
     def all(self):
-       """    
-        Returns a dictionary of all objects in __objects
-         dictionary: dictionary of all objects stored in the JSON file
-        """
-
+        """Returns a dictionary of all objects in __objects"""
         return FileStorage.__objects
 
     def new(self, obj):
@@ -30,9 +27,7 @@ class FileStorage:
         FileStorage.__objects[key] = obj
 
     def save(self):
-       """
-        Adds an object to the __objects dictionary
-        """
+        """Adds an object to the __objects dictionary"""
 
         with open(FileStorage.__file_path, 'w') as f:
 
@@ -43,10 +38,7 @@ class FileStorage:
             json.dump(sdict, f)
 
     def reload(self):
-        ''' Deserializes the JSON file to the __objects dictionary 
-            reload - reloads the objects from the JSON file into the dictionary
-
-        '''
+        ''' Deserializes the JSON file to the __objects dictionary'''
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 sdict = json.load(f)
@@ -69,4 +61,3 @@ class FileStorage:
                             FileStorage.__objects[key] = Review(**item)
         except FileNotFoundError:
             pass
-

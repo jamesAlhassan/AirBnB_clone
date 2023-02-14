@@ -1,13 +1,12 @@
 #!/usr/bin/python3
+''' Place class that inherits from BaseModel '''
 
 from models.base_model import BaseModel
 
-''' Place class that inherits from BaseModel '''
 
 class Place(BaseModel):
-
     ''' Blue print for Place object '''
-    
+
     city_id = ""
     user_id = ""
     name = ""
