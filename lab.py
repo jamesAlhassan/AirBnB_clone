@@ -18,3 +18,4 @@ pre3 = pre2[1].split('")')
 real.append(pre3[0])
 
 print(real)
+
