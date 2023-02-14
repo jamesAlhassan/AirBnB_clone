@@ -5,6 +5,6 @@ from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    ''' blue print for Amenity object'''
+    ''' Blue print for Amenity object'''
 
     name = ""
