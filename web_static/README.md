@@ -95,3 +95,13 @@ You must use the header and footer tags
 You are not allowed to import any files
 You are not allowed to use the style tag in the head tag
 Use inline styling for all your tags
+
+# 0-index.html - an HTML page that displays a header and a footer by using the style tag in the head tag (same as 0-index.html)
+
+Requirements:
+
+You must use the header and footer tags
+You are not allowed to import any files
+No inline styling
+You must use the style tag in the head tag
+The layout must be exactly the same as 0-index.html
