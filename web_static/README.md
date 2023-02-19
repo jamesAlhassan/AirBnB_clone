@@ -72,7 +72,7 @@ No cross browsers
 You have to follow all requirements but some margin/padding are missing - you should try to fit as much as you can to screenshots
 More Info
 
-# 0-index.html - an HTML page that displays a header and a footer.
+### 0-index.html - an HTML page that displays a header and a footer.
 
 Layout:
 
@@ -96,7 +96,7 @@ You are not allowed to import any files
 You are not allowed to use the style tag in the head tag
 Use inline styling for all your tags
 
-# 0-index.html - an HTML page that displays a header and a footer by using the style tag in the head tag (same as 0-index.html)
+### 0-index.html - an HTML page that displays a header and a footer by using the style tag in the head tag (same as 0-index.html)
 
 Requirements:
 
@@ -106,7 +106,7 @@ No inline styling
 You must use the style tag in the head tag
 The layout must be exactly the same as 0-index.html
 
-# 2-index.html, styles/2-common.css, styles/2-header.css, styles/2-footer.css - an HTML page that displays a header and a footer by using CSS files (same as 1-index.html)
+### 2-index.html, styles/2-common.css, styles/2-header.css, styles/2-footer.css - an HTML page that displays a header and a footer by using CSS files (same as 1-index.html)
 
 Requirements:
 
