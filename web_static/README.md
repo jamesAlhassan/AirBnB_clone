@@ -1,6 +1,7 @@
 # web_static
 
 ## Background Context
+
 Web static, what?
 Now that you have a command interpreter for managing your AirBnB objects, it’s time to make them alive!
 
@@ -18,6 +19,7 @@ During this project, you will learn how to manipulate HTML and CSS languages. HT
 Before starting, please fork or clone the repository AirBnB_clone from your partner if you were not the owner of the previous project.
 
 ## Resources
+
 Read or watch:
 
 Learn to Code HTML & CSS (until “Creating Lists” included)
@@ -32,6 +34,7 @@ Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
 ## General
+
 What is HTML
 How to create an HTML page
 What is a markup language
@@ -50,8 +53,11 @@ You are tasked to come up with solutions for the tasks below yourself to meet wi
 You will not be able to meet the objectives of this or any following project by copying and pasting someone else’s work.
 You are not allowed to publish any content of this project.
 Any form of plagiarism is strictly forbidden and will result in removal from the program.
+
 ## Requirements
+
 ## General
+
 Allowed editors: vi, vim, emacs
 All your files should end with a new line
 A README.md file, at the root of the folder of the project, is mandatory
@@ -65,3 +71,27 @@ Current screenshots have been done on Chrome 56 or more.
 No cross browsers
 You have to follow all requirements but some margin/padding are missing - you should try to fit as much as you can to screenshots
 More Info
+
+# 0-index.html - an HTML page that displays a header and a footer.
+
+Layout:
+
+Body:
+no margin
+no padding
+Header:
+color #FF0000 (red)
+height: 70px
+width: 100%
+Footer:
+color #00FF00 (green)
+height: 60px
+width: 100%
+text Best School center vertically and horizontally
+always at the bottom at the page
+Requirements:
+
+You must use the header and footer tags
+You are not allowed to import any files
+You are not allowed to use the style tag in the head tag
+Use inline styling for all your tags
