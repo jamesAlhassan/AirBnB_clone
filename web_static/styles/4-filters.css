@@ -17,3 +17,6 @@
   float: right;
   margin: 11px 30px; /* (70px - 48)/ 2 */
 }
+.filters > button:hover {
+  opacity: 90%;
+}
